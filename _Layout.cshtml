@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.ico">
+    <title>@ViewBag.Title</title>
+    <!-- CSS -->
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/perfect-scrollbar.min.css" rel="stylesheet" />
+
+    <link href="~/css/feather.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/css/morris.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/css/sweetalert.css" rel="stylesheet" />
+    <link href="~/css/select2.min.css" rel="stylesheet" />
+    <link href="~/css/loader.css" rel="stylesheet" />
+    @*<link href="~/dist/css/lightgallery.css" rel="stylesheet" />*@
+    <link href="~/css/lightgallery.min.css" rel="stylesheet" />
+
+
+    <link href="~/css/datepicker.css" rel="stylesheet" type="text/css" />
+
+    <!-- Head Libs -->
+    <script src="~/js/modernizr.min.js"></script>
+    <script data-pace-options='{ "ajax": true, "selectors": [ "img" ]}' src="~/js/pace.min.js"></script>
+
+</head>
+<body class="header-dark sidebar-light sidebar-expand" ng-app="myApp" ng-controller="LayoutAppCtr">
+    <div id="wrapper" class="wrapper">
+        <!-- HEADER & TOP NAVIGATION -->
+        <nav class="navbar">
+            <!-- Logo Area -->
+            <div class="navbar-header">
+                <a href="javascript:void(0)" class="navbar-brand">
+                    <img class="logo-expand" alt="" src="~/images/karvy-logo.png">
+                    <img class="logo-collapse" alt="" src="~/images/mini-logo.png">
+                    <!-- <p>BonVue</p> -->
+                </a>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- Left Menu & Sidebar Toggle -->
+            <ul class="nav navbar-nav">
+                <li class="sidebar-toggle">
+                    <a href="javascript:void(0)" class="ripple"><i class="feather feather-menu list-icon fs-20"></i></a>
+                </li>
+            </ul>
+            <!-- /.navbar-left -->
+
+            <div class="spacer"></div>
+            <!-- User Image with Dropdown -->
+            <ul class="nav navbar-nav mr-3">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle ripple" data-toggle="dropdown"><span class="avatar thumb-xs2"><img src="~/images/profile-user.svg" class="rounded-circle" alt=""> <i class="feather feather-chevron-down list-icon"></i></span></a>
+                    <div class="dropdown-menu dropdown-left dropdown-card dropdown-card-profile animated flipInY">
+                        <div class="card">
+
+                            <ul class="list-unstyled card-body">
+
+                                <li>
+                                    <a href="@Url.Action("ChangePassword", "MyAccount")"><span class="align-middle"> <i class="feather feather-settings align-middle"></i>&nbsp;&nbsp;Change Password</span></a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("MyProfile", "MyAccount")"><span class="align-middle"> <i class="feather feather-user align-middle"></i>&nbsp;&nbsp;My Profile</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" ng-click="logOut();"><span class="align-middle"> <i class="feather feather-power align-middle"></i>&nbsp;&nbsp;Sign Out</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <div class="content-wrapper">
+            <!-- SIDEBAR -->
+            <aside class="site-sidebar scrollbar-enabled" data-suppress-scroll-x="true">
+                <!-- User Details -->
+                <div class="side-user">
+                    <div class="col-sm-12 text-center p-0 clearfix">
+                        <div class="d-inline-block pos-relative mr-b-10">
+                            <figure class="thumb-sm mr-b-0 user--online">
+                                <img src="~/images/profile-user.svg" class="rounded-circle" alt="">
+                            </figure><a href="page-profile.html" class="text-muted side-user-link"><i class="feather feather-settings list-icon"></i></a>
+                        </div>
+                        <!-- /.d-inline-block -->
+                        <div class="lh-14 mr-t-5">
+                            <a href="JavaScript:Void(0);" class="hide-menu mt-3 mb-0 side-user-heading fw-500" ng-bind="UserName"></a>
+                            <br><small class="hide-menu" ng-bind="Role"></small>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-12 -->
+                </div>
+                <!-- /.side-user -->
+                <!-- Sidebar Menu -->
+                <nav class="sidebar-nav">
+                    <ul class="nav in side-menu" ng-cloak>
+                        <li class="current-page">
+                            <a href="@Url.Action("index", "consumer")"><i class="list-icon feather feather-users"></i> <span class="hide-menu">Consumers</span></a>
+                        </li>
+
+                        <li class="menu-item-has-children" ng-show="RoleId == 3">
+                            <a href="javascript:void(0);" aria-expanded="false"><i class="list-icon feather feather-check-square"></i> <span class="hide-menu">Quality Check</span></a>
+                            <ul class="list-unstyled sub-menu collapse" aria-expanded="false" style="height: 0px;">
+                                <li class="current-page" ng-show="RoleId == 3">
+                                    <a href="@Url.Action("QcCI", "QcAro")"><i class="list-icon feather feather-arrow-right"></i> <span class="hide-menu">QC</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item-has-children" ng-show="RoleId ==  1">
+                            <a href="javascript:void(0);" aria-expanded="false"><i class="list-icon feather feather-settings"></i> <span class="hide-menu">Admin Settings</span></a>
+                            <ul class="list-unstyled sub-menu collapse" aria-expanded="false" style="height: 0px;">
+
+                                <li class="current-page">
+                                    <a href="@Url.Action("index", "role")"><i class="list-icon feather feather-user"></i> <span class="hide-menu">Roles</span></a>
+                                </li>
+
+                                <li class="current-page">
+                                    <a href="@Url.Action("index", "user")"><i class="list-icon feather feather-user-plus"></i> <span class="hide-menu">Users</span></a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- /.side-menu -->
+                </nav>
+
+            </aside>
+            <!-- /.site-sidebar -->
+
+            @RenderBody()
+
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span class="heading-font-family">Copyright &copy; 2019. All rights reserved.</span><span style="float:right">v1.0</span>
+        </footer>
+    </div>
+    <!--/ #wrapper -->
+    <!-- Scripts -->
+    <!-- Scripts -->
+    <script src="~/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/metisMenu.min.js"></script>
+
+
+    <script src="~/js/perfect-scrollbar.jquery.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/dataTables.responsive.min.js"></script>
+    <script src="~/js/responsive.bootstrap4.min.js"></script>
+
+    <script src="~/js/theme.js"></script>
+    @*<script src="~/js/chart.init.js"></script>*@
+    <script src="~/js/zingchart.min.js"></script>
+    <script src="~/js/morris.min.js"></script>
+    <script src="~/js/raphael.min.js"></script>
+    <script src="~/js/sweetalert.min.js"></script>
+    <script src="~/js/select2.min.js"></script>
+    <script src="~/js/xlsx.js"></script>
+
+    <script src="~/js/xls.full.min.js"></script>
+    <script src="~/js/jszip.min.js"></script>
+
+    <script src="~/js/xlsx.core.min.js"></script>
+
+
+    <script src="~/js/bootstrap-datepicker.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+            $(".select2").select2();
+
+            $('.lightgallery').unbind().removeData();
+            $('.lightgallery').lightGallery({
+                rotate: true,
+                pager: false,
+                share: false,
+                mode: 'fade',
+                speed: 500,
+                loop: false,
+                counter: false,
+                startClass: '',
+                enableSwipe: false,
+                enableDrag: false,
+                counter: false
+
+            });
+
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+
+
+            $('.datepicker1').datepicker({
+                format: 'M-yyyy',
+                todayHighlight: 'TRUE',
+                autoclose: true,
+            }).on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
+
+            $('.datepicker2').datepicker({
+                format: 'dd-M-yyyy',
+                todayHighlight: 'TRUE',
+                autoclose: true,
+            }).on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
+        });
+    </script>
+
+    <script src="~/js/angular.min.js"></script>
+    <script src="~/js/angular-animate.min.js"></script>
+    <script src="~/js/angular-aria.min.js"></script>
+    <script src="~/js/angular-messages.min.js"></script>
+    <script src="~/js/angular-material.min.js"></script>
+    <script src="~/js/ngStorage.min.js"></script>
+    <script src="~/js/dirPagination.js"></script>
+    <script src="~/js/Chart.min.js"></script>
+    <script src="~/AngularControllers/App.js"></script>
+    <script src="~/AngularControllers/Config.js"></script>
+    <script src="~/AngularControllers/sessionManager.js"></script>
+    <script src="~/AngularControllers/LayoutApp.js"></script>
+    <script src="~/AngularControllers/user/User.js"></script>
+    <script src="~/AngularControllers/user/EditUser.js"></script>
+    <script src="~/AngularControllers/Consumer.js"></script>
+    <script src="~/AngularControllers/MyAccount.js"></script>
+    <script src="~/AngularControllers/Role.js"></script>
+    <script src="~/AngularControllers/ConsumerDetails.js"></script>
+    <script src="~/js/picturefill.min.js"></script>
+    @*<script src="~/dist/js/lightgallery-all.min.js"></script>*@
+    <script src="~/js/lightgallery-all.js"></script>
+    <script src="~/dist/js/jquery.mousewheel.min.js"></script>
+    <script src="~/AngularControllers/ConsumerUpdateExcel.js"></script>
+    <script src="~/AngularControllers/QcAro/QcCI.js"></script>
+    <script src="~/AngularControllers/QcAro/QcDetails_CI.js"></script>
+
+</body>
+</html>
